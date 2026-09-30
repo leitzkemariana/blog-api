@@ -1,9 +1,14 @@
 package com.api.blogapi.service;
 
+import com.api.blogapi.dto.request.ComentarioRequestDto;
 import com.api.blogapi.dto.request.PostRequestDto;
+import com.api.blogapi.dto.response.ComentarioResponseDto;
 import com.api.blogapi.dto.response.PostResponseDto;
+import com.api.blogapi.mapper.ComentarioMapper;
 import com.api.blogapi.mapper.PostMapper;
+import com.api.blogapi.model.ComentarioModel;
 import com.api.blogapi.model.PostModel;
+import com.api.blogapi.repository.ComentarioRepository;
 import com.api.blogapi.repository.PostRepository;
 
 import org.springframework.stereotype.Service;
@@ -18,10 +23,14 @@ import java.util.UUID;
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final PostMapper postMapper;
+    private final ComentarioRepository comentarioRepository;
+    private final ComentarioMapper comentarioMapper;
 
-    public PostServiceImpl(PostRepository postRepository, PostMapper postMapper) {
+    public PostServiceImpl(PostRepository postRepository, PostMapper postMapper, ComentarioRepository comentarioRepository, ComentarioMapper comentarioMapper) {
         this.postRepository = postRepository;
         this.postMapper = postMapper;
+        this.comentarioRepository = comentarioRepository;
+        this.comentarioMapper = comentarioMapper;
     }
 
     @Override
@@ -55,5 +64,19 @@ public class PostServiceImpl implements PostService {
         PostModel post = postMapper.toEntity(dto);
         PostModel saved = postRepository.save(post);
         return postMapper.toDto(saved);
+    }
+
+    @Override
+    @Transactional
+    public ComentarioResponseDto addComentario(UUID postId, ComentarioRequestDto dto) {
+        Optional<PostModel> optionalPost = postRepository.findById(postId);
+        PostModel post = optionalPost.get();
+
+        ComentarioModel comentario = new ComentarioModel(dto.comentario(), post);
+        post.adicionarComentario(comentario);
+
+        ComentarioModel saved = comentarioRepository.save(comentario);
+
+        return comentarioMapper.toDto(saved);
     }
 }

@@ -42,6 +42,11 @@ public class PostModel implements Serializable {
         this.data = LocalDate.now();
     }
 
+    public void adicionarComentario(ComentarioModel comentario) {
+        comentarios.add(comentario);
+        comentario.setPost(this);
+    }
+
     public UUID getId() {
         return id;
     }
