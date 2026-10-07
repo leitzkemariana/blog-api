@@ -79,4 +79,46 @@ public class PostServiceImpl implements PostService {
 
         return comentarioMapper.toDto(saved);
     }
+
+    //  @Override
+//  @Transactional
+//  public PostResponseDto updatePost(UUID id, PostRequestDto dto) {
+//      Optional<PostModel> optionalPost = postRepository.findById(id);
+//
+//      if (optionalPost.isEmpty()) {
+//          throw new RuntimeException("Post não encontrado com o ID: " + id);
+//      }
+//
+//      PostModel post = optionalPost.get();
+//      postMapper.updateEntityFromDto(dto, post);
+//
+//      PostModel updatedPost = postRepository.save(post);
+//      return postMapper.toDto(updatedPost);
+//  }
+
+//  @Override
+//  @Transactional
+//  public void deletePost(UUID id) {
+//      Optional<PostModel> optionalPost = postRepository.findById(id);
+//
+//      if (optionalPost.isEmpty()) {
+//          throw new RuntimeException("Post não encontrado com o ID: " + id);
+//      }
+//
+//      PostModel post = optionalPost.get();
+//      postRepository.delete(post);
+//  }
+
+//    @Override
+//    @Transactional
+//    public void deleteComentario(UUID comentarioId) {
+//
+//    	 Optional<ComentarioModel> optionalComentario = comentarioRepository.findById(comentarioId);
+//
+//         if (optionalComentario.isEmpty()) {
+//             throw new RuntimeException("Comentário não encontrado com o ID: " + comentarioId);
+//         }
+//         ComentarioModel comentario = optionalComentario.get();
+//         comentarioRepository.delete(comentario);
+//    }
 }
