@@ -13,6 +13,7 @@ import java.util.UUID;
 public interface PostService {
     //List<PostResponseDto> findAll();
     Page<PostResponseDto> findAll(Pageable pageable);
+    Page<PostResponseDto> findAll(Pageable pageable, String titulo);
 
     PostResponseDto findById(UUID id);
 

@@ -36,14 +36,15 @@ public class PostController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size,
             @RequestParam(defaultValue = "data") String sortBy,
-            @RequestParam(defaultValue = "desc") String direction){
+            @RequestParam(defaultValue = "desc") String direction,
+            @RequestParam(required = false) String titulo){
 
         Sort sort = direction.equalsIgnoreCase("asc")
                 ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
 
         Pageable pageable = PageRequest.of(page, size, sort);
-        return ResponseEntity.ok(postService.findAll(pageable));
+        return ResponseEntity.ok(postService.findAll(pageable, titulo));
     }
 
     @Operation(summary = "Mostra post do id informado")
