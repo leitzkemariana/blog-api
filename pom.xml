@@ -91,6 +91,11 @@
             <artifactId>spring-boot-flyway</artifactId>
             <version>4.1.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
