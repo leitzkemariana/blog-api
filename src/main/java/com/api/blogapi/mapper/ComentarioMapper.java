@@ -1,6 +1,7 @@
 package com.api.blogapi.mapper;
 
 import com.api.blogapi.dto.request.ComentarioRequestDto;
+import com.api.blogapi.dto.request.PostRequestDto;
 import com.api.blogapi.dto.response.ComentarioResponseDto;
 import com.api.blogapi.model.ComentarioModel;
 import com.api.blogapi.model.PostModel;
@@ -27,5 +28,12 @@ public class ComentarioMapper {
                 entity.getData(),
                 entity.getComentario()
         );
+    }
+
+    public void updateEntityFromDto(ComentarioRequestDto dto, ComentarioModel entity) {
+        if (dto == null || entity == null) {
+            return;
+        }
+        entity.setComentario(dto.comentario());
     }
 }

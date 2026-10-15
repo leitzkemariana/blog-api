@@ -53,13 +53,13 @@ public class PostMapper {
                 comentariosDto
         );
     }
-}
 
-//public void updateEntityFromDto(PostRequestDto dto, PostModel entity) {
-//    if (dto == null || entity == null) {
-//        return;
-//    }
-//    entity.setAutor(dto.autor());
-//    entity.setTitulo(dto.titulo());
-//    entity.setTexto(dto.texto());
-//}
+    public void updateEntityFromDto(PostRequestDto dto, PostModel entity) {
+        if (dto == null || entity == null) {
+            return;
+        }
+        entity.setAutor(dto.autor());
+        entity.setTitulo(dto.titulo());
+        entity.setTexto(dto.texto());
+    }
+}

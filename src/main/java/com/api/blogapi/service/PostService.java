@@ -20,4 +20,12 @@ public interface PostService {
     PostResponseDto createPost(PostRequestDto dto);
 
     ComentarioResponseDto addComentario(UUID postId, ComentarioRequestDto dto);
+
+    PostResponseDto updatePost(UUID postId, PostRequestDto dto);
+
+    void deletePost(UUID postId);
+
+    void deleteComentario(UUID id);
+
+    ComentarioResponseDto updateComentario(UUID postId, ComentarioRequestDto dto);
 }

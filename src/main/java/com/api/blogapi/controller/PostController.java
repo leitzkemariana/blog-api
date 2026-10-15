@@ -67,4 +67,23 @@ public class PostController {
             @RequestBody @Valid ComentarioRequestDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(postService.addComentario(postId, dto));
     }
+
+    @Operation(summary = "Atualiza post")
+    @PutMapping("/post/{id}")
+    public ResponseEntity<PostResponseDto> updatePost(
+            @PathVariable UUID id,
+            @RequestBody @Valid PostRequestDto dto
+    ){
+        return ResponseEntity.ok(postService.updatePost(id, dto));
+    }
+
+    @DeleteMapping("/posts/{id}")
+    public void deletePost(@PathVariable UUID id){
+        postService.deletePost(id);
+    }
+
+    @PutMapping("/comentarios/{id}")
+    public void deleteComentario(@PathVariable UUID id){
+        postService.deleteComentario(id);
+    }
 }
