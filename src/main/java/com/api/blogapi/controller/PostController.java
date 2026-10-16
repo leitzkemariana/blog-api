@@ -69,7 +69,7 @@ public class PostController {
     }
 
     @Operation(summary = "Atualiza post")
-    @PutMapping("/post/{id}")
+    @PutMapping("/editapost/{id}")
     public ResponseEntity<PostResponseDto> updatePost(
             @PathVariable UUID id,
             @RequestBody @Valid PostRequestDto dto
@@ -77,7 +77,7 @@ public class PostController {
         return ResponseEntity.ok(postService.updatePost(id, dto));
     }
 
-    @DeleteMapping("/posts/{id}")
+    @DeleteMapping("/deletapost/{id}")
     public void deletePost(@PathVariable UUID id){
         postService.deletePost(id);
     }
