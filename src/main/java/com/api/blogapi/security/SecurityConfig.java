@@ -19,7 +19,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return  http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.GET,"/api/posts", "/api/post/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/api/posts", "/api/posts/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/newpost").permitAll()
                         .requestMatchers(HttpMethod.PUT,"/api/editapost/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/deletapost/**").hasRole("ADMIN")
