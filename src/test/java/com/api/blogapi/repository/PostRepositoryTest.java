@@ -4,11 +4,17 @@ import com.api.blogapi.model.PostModel;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 
 @DataJpaTest
 @ActiveProfiles("test")
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class PostRepositoryTest {
 
     @Autowired
@@ -21,5 +27,20 @@ public class PostRepositoryTest {
         PostModel postSalvo = repository.save(post);
 
         Assertions.assertThat(postSalvo).isNotNull();
+    }
+
+    @Test
+    void deveListarPorTitulo(){
+        PostModel post1 = new PostModel("Autor", "Aula +devs", "Kachow");
+        PostModel post2 = new PostModel("Autor1", "Tarefa +devs", "Kachow");
+        PostModel post3 = new PostModel("Autor2", "Prova +devs", "Kachow");
+
+        repository.save(post1);
+        repository.save(post2);
+        repository.save(post3);
+
+        Page<PostModel> listaPosts = repository.findByTituloContainingIgnoreCase("+devs", PageRequest.of(0,10));
+
+        Assertions.assertThat(listaPosts).hasSize(3);
     }
 }
